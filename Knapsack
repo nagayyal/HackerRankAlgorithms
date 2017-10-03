@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        int t=scan.nextInt();
+        for(int l=0;l<t;l++)
+        {
+            int n=scan.nextInt();
+            int k=scan.nextInt();
+            int[][] tmatrix=new int[n+1][k+1];
+            int weights[]=new int[n];
+            for(int a=0;a<n;a++)
+            {
+                weights[a]=scan.nextInt();
+            }
+           
+            
+            for(int i=1;i<=n;i++)
+            {
+                //expected weight 
+                for(int j=1;j<=k;j++)
+                {
+                    if(j>=weights[i-1])
+                    {
+                        //max of (optimal solution excluding that weight(look for the upper row) + including the weight+t[remaining weight otimal solution]
+                        tmatrix[i][j]=Math.max(tmatrix[i-1][j],weights[i-1]+tmatrix[i][j-weights[i-1]]);
+                    }
+                    else
+                    {
+                        tmatrix[i][j]=tmatrix[i-1][j];
+                    }
+                }
+                    
+            }
+            System.out.println(tmatrix[n][k]);
+            
+            
+        }
+    }
+}
