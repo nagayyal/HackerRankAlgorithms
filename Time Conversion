@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        String result = timeConversion(s);
+        System.out.println(result);
+    }
+    
+    public static String timeConversion(String a)
+    {
+        
+        if (a==null)
+        {
+            return a;
+        }
+        
+        String std=new String(),time=new String(),rest=new String();
+        String result=new String();
+        
+            std=(a.substring(a.length()-2));
+        
+           time=(a.substring(0,2));
+        
+        
+            rest=a.substring(2,a.length()-2);
+       if(std.equals("PM") && Integer.parseInt(time)>=1 && Integer.parseInt(time)<12) 
+       {
+            result= String.valueOf(Integer.parseInt(time)+12).concat(rest);
+           
+       }
+        else
+            if(std.equals("PM") && Integer.parseInt(time)==12)
+            {
+                result=time.concat(rest);
+            }
+         
+        
+        else
+       
+        if(std.equals("AM"))
+        {
+            if(time.equals("12"))
+            {
+                result=("00").concat(rest);
+            }
+            else
+            {
+                result=time.concat(rest);
+            }
+        }
+         
+        return result;
+    }
+}
