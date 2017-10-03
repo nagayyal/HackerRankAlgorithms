@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int k=scan.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=scan.nextInt();
+        }
+       int result= getNumberOfPairs(arr,n,k);
+        System.out.println(result);
+    }
+    public static int getNumberOfPairs(int[] arr,int n,int k)
+    {
+        int cnt=0;
+        int cntArray[]=new int[k];
+        for(int i=0;i<n;i++)
+        {
+           cntArray[arr[i]%k]++;
+        }
+        for(int i=1;i<=k/2;i++)
+        {
+            if(2*i!=k)
+            {
+            cnt+=Math.max(cntArray[i],cntArray[k-i]);
+            }
+        }
+        if(k%2==0)
+        {
+            if(cntArray[k/2]>0)
+                cnt++;
+        }
+        if(cntArray[0]>0)
+        {
+            cnt++;
+        }
+        return cnt;
+    }
+}
