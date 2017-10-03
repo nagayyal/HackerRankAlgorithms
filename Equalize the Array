@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=scan.nextInt();
+        }
+        System.out.println(numberOfDeletions(arr,n));    
+    }
+    public static int numberOfDeletions(int arr[],int n)
+    {
+      Map<Integer,Integer> hmap=new HashMap();
+        for(int i=0;i<n;i++)
+        {
+            if(hmap.containsKey(arr[i]))
+            {
+                hmap.put(arr[i],hmap.get(arr[i])+1);
+                
+            }
+            else
+            {
+                hmap.put(arr[i],1);
+            }
+        }
+        int count=0;
+        for(Map.Entry<Integer,Integer> entry:hmap.entrySet())
+        {
+            int keyValue=entry.getKey();
+            int value=entry.getValue();
+            if(value>count)
+            {
+               count=value; 
+            }
+        }
+        return (n-(count));
+    }
+}
