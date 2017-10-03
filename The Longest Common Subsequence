@@ -1,0 +1,83 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int m=scan.nextInt();
+        int a[]=new int[n];
+        int b[]=new int[m];
+        for(int q=0;q<n;q++)
+        {
+            a[q]=scan.nextInt();
+        }
+        for(int l=0;l<m;l++)
+        {
+            b[l]=scan.nextInt();
+        }
+        int[][] tmatrix=new int[n+1][m+1];
+        
+        for(int i=0;i<=n;i++)
+        {
+            tmatrix[i][0]=0;
+        }
+        for(int c=0;c<=m;c++)
+        {
+            tmatrix[0][c]=0;
+        }
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                if(a[i-1]==b[j-1])
+                {
+                    tmatrix[i][j]=1+tmatrix[i-1][j-1];
+                }
+                else
+                {
+                   tmatrix[i][j]=Math.max(tmatrix[i-1][j],tmatrix[i][j-1]); 
+                }
+            
+            }
+        }
+        
+        //System.out.print(tmatrix[n][m]);
+        Stack<Integer> usethis=new Stack();
+       // usethis.push(tmatrix[n][m]);
+        int i=n,j=m;
+        while(i>0 && j>0){
+            //ony push when diagonal element equals i.e pushing only equal
+        if(a[i-1]==b[j-1])
+        {
+            
+            i--;
+            j--;
+            usethis.push(a[i]);
+            
+            
+        }
+        
+            //check for the below step;
+            //if((tmatrix[i][j]==Math.max(tmatrix[i-1][j],tmatrix[i][j-1]))
+         else   if(tmatrix[i-1][j]>tmatrix[i][j-1])
+            {
+                i--;
+            }
+            else
+            {
+                j--;
+            }
+        }
+    
+        while(!usethis.isEmpty())
+        {
+            System.out.print(usethis.pop()+" ");
+        }
+}
+}
