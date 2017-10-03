@@ -1,0 +1,99 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int k = in.nextInt();
+        int rQueen = in.nextInt();
+        int cQueen = in.nextInt();
+        int count=0;
+        int left=cQueen-1;
+        int right=n-cQueen;
+        int top=n-rQueen;
+        int bottom=rQueen-1;
+        int topLeft=Math.min(top,left);
+         int topRight=Math.min(top,right);
+        int bottomLeft=Math.min(bottom,left);
+        int bottomRight=Math.min(bottom,right);
+        int result=0;
+        
+        for(int a = 0; a < k; a++){
+            int rObstacle = in.nextInt();
+            int cObstacle = in.nextInt();
+            // your code goes here
+            if(rObstacle==rQueen)
+            {
+                //if the obstacle is to the left
+                if(cObstacle<cQueen)
+                {
+                    left=Math.min(left,cQueen-cObstacle-1);
+                }
+               else{
+                    right=Math.min(right,cObstacle-cQueen-1);
+               }
+                
+            }
+            else if(cObstacle==cQueen)
+            {
+                //bottom
+                if(rObstacle<rQueen)
+                {
+                    bottom=Math.min(bottom,rQueen-rObstacle-1);
+                }
+                else{
+                //top
+                
+                    top=Math.min(top,rObstacle-rQueen-1);
+                 
+                }
+            }
+            //check if matrix values are diagonol to Queen 
+           else if(Math.abs(rObstacle-rQueen)==Math.abs(cObstacle-cQueen))
+           {
+               int diff=Math.abs(cObstacle-cQueen)-1;
+               
+                //if the obstacle is to the bottomleft
+                if(cObstacle<cQueen)
+                {
+                    if(rObstacle<rQueen)
+                    {
+                    bottomLeft=Math.min(bottomLeft,diff);
+                }
+                    else
+                    {
+                        topLeft=Math.min(topLeft,diff);
+                    }
+                }
+                
+                // if the obstacle is to right
+                else if(cObstacle>cQueen)
+                { 
+                    if(rObstacle<rQueen)
+                    {
+                    bottomRight=Math.min(bottomRight,diff);
+                }
+                    else
+                    {
+                        
+                        topRight=Math.min(topRight,diff);
+                    }
+                }
+                    
+                
+               
+           }
+            
+        }
+        result=right+left+top+bottom+topRight+topLeft+bottomLeft+bottomRight;
+        System.out.println(result);
+        
+    }
+   
+    
+}
