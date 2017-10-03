@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int[] arr = new int[5];
+        for(int arr_i=0; arr_i < 5; arr_i++){
+            arr[arr_i] = in.nextInt();
+        }
+        int n=arr.length;
+            long[] MaxandMinrray=MaxandMin(arr,n);
+            for(int i=0;i<2;i++)
+            {
+           System.out.print( MaxandMinrray[i]+" ");
+        
+    }
+    }
+        public static long[] MaxandMin(int [] arr,int n)
+        {
+            long max=0,min=Long.MAX_VALUE,sum=0;
+                for(int i=0;i<n;i++)
+                {
+                   sum+=arr[i];
+                    if(arr[i]<min)
+                    {
+                        min=arr[i];
+                    }
+                    if(arr[i]>max)
+                    {
+                        max=arr[i];
+                    }
+                }
+            long[] minandMax={sum-max,sum-min};
+            return minandMax;
+        }
+    
+}
